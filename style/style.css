@@ -1,0 +1,21 @@
+.centered { vertical-align:middle !important; text-align:center; }
+.centered-button { display:block; margin:0 auto; }
+.margin-top-bottom {margin-top: 10px; margin-bottom: 10px;}
+.btn {
+    margin-bottom: 10px !important;
+}
+img{
+    display: none
+}
+
+span:hover + img{
+    display: block;
+}
+
+paddingRight {
+    padding-right: 10px;
+}
+
+button {
+    width: 100px;
+}
