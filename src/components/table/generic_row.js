@@ -3,14 +3,22 @@
  */
 import React from 'react';
 import {Glyphicon} from 'react-bootstrap';
-const GenericRow = ({data, columns}) => {
+const GenericRow = ({data, columns, selectedId}) => {
   const headers = columns.map((column) => {
 
     switch(column.type){
       case ('checkbox'):
-        return <td key={column.id}><input type="checkbox"/></td>;//checked={this.props.done} />
+        console.log(selectedId);
+        if(column.id == selectedId) {
+          console.log('found selected');
+          return <td key={column.id}><input type="checkbox" checked="true"/></td>;//checked={this.props.done} />
+        }
+        else
+          return <td key={column.id}><input type="checkbox"/></td>;//checked={this.props.done} />
       case ('icon'):
-        return <td className="centered" key={column.id}><a href="#" onClick={() => {column.action(true)}}><Glyphicon glyph={column.dataIndex}/></a></td>;
+        return <td className="centered" key={column.id}><a href="#" onClick={() => {column.action()}}><Glyphicon glyph={column.dataIndex}/></a></td>;
+      case ('iconSetActive'):
+        return <td className="centered" key={column.id}><a href="#" onClick={() => {column.action(column.id)}}><Glyphicon glyph={column.dataIndex}/></a></td>;
       case ('hyperlink'):
         return <td key={column.id}><a href={data[column.dataIndex]} target="_blank">{data[column.dataIndex]}</a></td>;
       case ('image'):

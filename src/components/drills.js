@@ -6,8 +6,7 @@ import {connect} from 'react-redux';
 import GenericTable from './table/generic_table';
 import {Button} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
-import {LoadDefaultDrills} from '../actions/index';
-import {Link} from 'react-router-dom';
+import {LoadDefaultDrills, selectDrill} from '../actions/index';
 
 class Drills extends Component{
   constructor(props) {
@@ -16,8 +15,8 @@ class Drills extends Component{
   componentDidMount(){
     this.props.LoadDefaultDrills(this.props.dispatch);
   }
-  viewDrillInfo(){
-    console.log('View Drill Info');
+  viewDrillInfo(id){
+    this.props.selectDrill(id);
   }
   render() {
     if(!this.props.drillData)
@@ -29,13 +28,8 @@ class Drills extends Component{
       {title: 'Name', dataIndex:'name', width: '75px', id: 2},
       {title: 'Image', type:'image', dataIndex:'image', id: 3},
       {title: 'Procedure', dataIndex:'procedure', id: 4},
-      {title: 'Edit', type:'icon', dataIndex:'sunglasses', action:this.viewDrillInfo.bind(this),  id: 5},
+      {title: 'Edit', type:'iconSetActive', dataIndex:'sunglasses', action:this.viewDrillInfo.bind(this),  id: 5},
     ];
-
-    const gridOptions = {
-      add: true,
-      edit: true
-    };
 
     return (
       <div>
@@ -44,7 +38,7 @@ class Drills extends Component{
         {/*<Link className="pull-right btn btn-success" to="/load/addupdate">Add</Link>*/}
         <Button bsStyle="success">Add</Button>
         <Button bsStyle="danger" className="pull-right">Delete</Button>
-        <GenericTable columns={columns} rows={this.props.drillData}/>
+        <GenericTable columns={columns} selectedId={this.props.activeDrill} rows={this.props.drillData}/>
       </div>
     );
   }
@@ -52,12 +46,13 @@ class Drills extends Component{
 
 function mapStateToProps(state) {
   return {
-    drillData: state.drillData
+    drillData: state.drillData,
+    activeDrill: state.activeDrill
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({LoadDefaultDrills: LoadDefaultDrills}, dispatch);
+  return bindActionCreators({LoadDefaultDrills: LoadDefaultDrills, selectDrill: selectDrill}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drills);

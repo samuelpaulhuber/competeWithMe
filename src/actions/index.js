@@ -4,7 +4,19 @@ export const LOAD_DATA = 'LOAD_DATA';
 export const LOAD_DRILLS = 'LOAD_DRILLS';
 export const LOGIN = 'LOGIN';
 export const ERROR = 'ERROR';
+export const DRILL_SELECTED = 'DRILL_SELECTED';
+
 const ROOT_URL = 'http://localhost:3000/compete';
+
+export function selectDrill(drill) {
+  console.log('--');
+  console.log(drill);
+  console.log('--');
+  return {
+    type: DRILL_SELECTED,
+    payload: drill
+  };
+}
 
 export function login(values, dispatch) {
   // axios.post(`${ROOT_URL}/login`, values)

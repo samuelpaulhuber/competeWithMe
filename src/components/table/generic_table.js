@@ -21,7 +21,7 @@ class GenericTable extends Component{
       // this should be changed to its own component
       // because thats the only way to use a key
       return(
-        <GenericRow key={load.id} data={load} columns={this.props.columns}/>
+        <GenericRow key={load.id} data={load} columns={this.props.columns} selectedId={this.props.selectedId}/>
       );
     });
   }
