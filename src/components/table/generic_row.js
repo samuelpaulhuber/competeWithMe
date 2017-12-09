@@ -9,7 +9,7 @@ const GenericRow = ({data, columns, selectedId}) => {
     switch(column.type){
       case ('checkbox'):
         console.log(selectedId);
-        if(column.id == selectedId) {
+        if(data['id'] == selectedId) {
           console.log('found selected');
           return <td key={column.id}><input type="checkbox" checked="true"/></td>;//checked={this.props.done} />
         }
