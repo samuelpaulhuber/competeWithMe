@@ -33,7 +33,7 @@ class Login extends Component {
   }
 
   onSubmit(values){
-    this.props.login(values);
+    this.props.login(values, this.props.dispatch);
   }
 
   renderField(field){

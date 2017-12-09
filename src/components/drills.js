@@ -14,7 +14,7 @@ class Drills extends Component{
     super(props);
   }
   componentDidMount(){
-    this.props.LoadDefaultDrills();
+    this.props.LoadDefaultDrills(this.props.dispatch);
   }
   viewDrillInfo(){
     console.log('View Drill Info');
