@@ -10,6 +10,7 @@ import promise from 'redux-promise';
 import Login from './components/login';
 import Register from './components/register';
 import Drills from './components/drills';
+import Drill from './components/drill';
 import Welcome from './components/welcome';
 import Error from './components/error';
 import {isTokenDefined} from './utils/util';
@@ -24,6 +25,7 @@ ReactDOM.render(
           <Header/>
           <Switch>
             {/*<Route path="/load/list" component={LoadData} onEnter={requireAuth}/>*/}
+            <Route path="/drill" component={Drill}/>
             <Route exact path="/drills" render={() => (
               isTokenDefined() ? (
                   <Drills />
