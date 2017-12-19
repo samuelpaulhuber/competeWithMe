@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 import Header from './components/header';
@@ -15,10 +15,15 @@ import Welcome from './components/welcome';
 import Error from './components/error';
 import {isTokenDefined} from './utils/util';
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(
+  applyMiddleware(promise)
+));
+
+// const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <div>
       <BrowserRouter>
         <div>
@@ -28,10 +33,10 @@ ReactDOM.render(
             <Route path="/drill" component={Drill}/>
             <Route exact path="/drills" render={() => (
               isTokenDefined() ? (
-                  <Drills />
-                ) : (
-                  <Redirect to="/login"/>
-                )
+                <Drills />
+              ) : (
+                <Redirect to="/login"/>
+              )
             )}/>
             <Route path="/error" component={Error}/>
             <Route path="/register" component={Register}/>

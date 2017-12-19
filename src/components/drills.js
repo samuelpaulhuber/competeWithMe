@@ -7,7 +7,7 @@ import GenericTable from './table/generic_table';
 import {Button} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 import {LoadDefaultDrills, selectDrill} from '../actions/index';
-
+import {browserHistory} from 'react-router';
 class Drills extends Component{
   constructor(props) {
     super(props);
@@ -20,8 +20,8 @@ class Drills extends Component{
   }
   viewDrillInfo(id){
     this.props.selectDrill(id);
-    // console.log(this.props.history);
-    //window.location.replace("http://localhost:9000/drill");
+    // console.log(browserHistory);
+    //window.location.replace("http://localhost:9000/drillpark");
   }
   render() {
     if(!this.props.drillData)
@@ -33,7 +33,7 @@ class Drills extends Component{
       {title: 'Name', dataIndex:'name', width: '75px', id: 2},
       {title: 'Image', type:'image', dataIndex:'image', id: 3},
       {title: 'Procedure', dataIndex:'procedure', id: 4},
-      {title: 'Edit', type:'iconSetActive', dataIndex:'sunglasses', action:this.viewDrillInfo.bind(this),  id: 5},
+      {title: 'Edit', type:'navigateIconWithAction', route:'/drill', dataIndex:'sunglasses', action:this.viewDrillInfo.bind(this),  id: 5},
     ];
 
     return (
