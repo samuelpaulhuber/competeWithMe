@@ -21,7 +21,7 @@ class Drills extends Component{
   viewDrillInfo(id){
     this.props.selectDrill(id);
     // console.log(browserHistory);
-    //window.location.replace("http://localhost:9000/drillpark");
+    //window.location.replace("http ://localhost:9000/drillpark");
   }
   render() {
     if(!this.props.drillData)
