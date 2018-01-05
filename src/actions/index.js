@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import {dispatch} from 'react-redux';
 export const LOAD_DATA = 'LOAD_DATA';
 export const LOAD_DRILLS = 'LOAD_DRILLS';
 export const LOGIN = 'LOGIN';
@@ -7,8 +6,77 @@ export const ERROR = 'ERROR';
 export const DRILL_SELECTED = 'DRILL_SELECTED';
 export const GET_DRILL = 'GET_DRILL';
 export const LOAD_DRILL = 'LOAD_DRILL';
+export const UPDATE_DRILL = 'UPDATE_DRILL';
+export const ADD_DRILL = 'ADD_DRILL';
+export const DELETE_DRILL = 'DELETE_DRILL';
+export const REMOVE_ACTIVE_DRILL = 'REMOVE_ACTIVE_DRILL';
 
 const ROOT_URL = 'http://localhost:3000/compete';
+
+export function removeActiveDrill(){
+  console.log('removing');
+  return {
+    type: REMOVE_ACTIVE_DRILL,
+    payload: null
+  }
+}
+
+export function deleteDrill(dispatch, drill, callback){
+  const request = axios.post(`${ROOT_URL}/deleteDrill`, drill,{
+    headers: {
+      'x-access-token': localStorage.getItem('CompeteWithMeToken')
+    }
+  })
+    .catch((err) => {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
+    });
+
+  return {
+    type: DELETE_DRILL,
+    payload: request
+  }
+}
+
+export function addDrill(dispatch, drill, callback){
+  const request = axios.post(`${ROOT_URL}/addDrill`, drill,{
+      headers: {
+        'x-access-token': localStorage.getItem('CompeteWithMeToken')
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
+    });
+
+  return {
+    type: ADD_DRILL,
+    payload: request
+  }
+}
+
+export function updateDrill(dispatch, drill, callback){
+  const request = axios.post(`${ROOT_URL}/updateDrill`, drill,{
+      headers: {
+        'x-access-token': localStorage.getItem('CompeteWithMeToken'),
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
+    });
+
+  return {
+    type: UPDATE_DRILL,
+    payload: request
+  }
+}
 
 export function loadDrill() {
   const drill = {
@@ -33,7 +101,7 @@ export function selectDrill(drill) {
   };
 }
 
-export function getDrill(id) {
+export function getDrill(id, dispatch) {
   const request = axios.post(`${ROOT_URL}/login`, values)
     .catch((err) => {
       dispatch({
@@ -49,12 +117,6 @@ export function getDrill(id) {
 }
 
 export function login(values, dispatch) {
-  // axios.post(`${ROOT_URL}/login`, values)
-  // .then(resp => {
-  //   return {type: LOGIN, payload: resp};//dispatch({type: LOGIN, payload: resp});
-  // })
-  //return {type: ''};
-
   const request = axios.post(`${ROOT_URL}/login`, values)
     .catch((err) => {
       dispatch({

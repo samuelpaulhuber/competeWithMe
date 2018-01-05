@@ -19,3 +19,19 @@ paddingRight {
 button {
     width: 100px;
 }
+
+.btn-link {
+    width: 25px !important;
+}
+
+.btn {
+    width: 100px;
+}
+
+table {
+    text-align: center;
+}
+
+.table>thead>tr>th {
+    text-align: center;
+}

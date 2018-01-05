@@ -20,6 +20,7 @@ export function renderField(field){
 
   //..field.input says take all my properties and assign them as properties to input jsx
   return(
+
     <div className={className}>
       <label>{field.label}</label>
       <input
@@ -27,9 +28,11 @@ export function renderField(field){
         type="text"
         {...field.input}
       />
+      {/*<img id="team-logo-img" className="img-responsive center-block" src="http://www.shootingusa.com/PRO_TIPS/USAMU7-6WarmUp/USAMU7-6-9.jpg" />*/}
       <div className="text-help">
         {touched ? error : ''}
       </div>
+
     </div>
   );
 }
